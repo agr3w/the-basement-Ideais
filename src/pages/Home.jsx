@@ -1,31 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
-// Importando os componentes das seções da Home
-// import Navbar from '../components/layout/Navbar';
-import HeroSection from '../components/home/HeroSection';
-import ServicesSection from '../components/home/ServicesSection';
-import FeaturedProjects from '../components/home/FeaturedProjects';
-import TeamSection from '../components/home/TeamSection';
-import ContactCTA from '../components/home/ContactCTA';
-import Footer from '../components/layout/Footer';
+import HeroSection from '../components/HeroSection/HeroSection';
+// Importe a próxima seção quando ela estiver pronta
+// import ServicesSection from '../components/ServicesSection/ServicesSection';
 
 const Home = () => {
-    return (
-        <Box>
-            <main style={{ marginTop: '64px', backgroundColor: '#000000' }}>
-                <HeroSection />
-                {/* Adicione um ID aqui */}
-                <div id="services-section">
-                    <ServicesSection />
-                </div>
-                <FeaturedProjects />
-                <TeamSection />
-                <ContactCTA />
-            </main>
-            <Footer />
+  // Estado para o efeito de "zoom-out"
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Hooks do Framer Motion para detectar scroll
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    // Gatilho da animação com base no seu Milanote
+    setIsScrolled(latest > 50);
+  });
+
+  return (
+    <Box sx={{ backgroundColor: '#333333' }}>
+      
+      {/* Container da HeroSection com animação de padding */}
+      <Box 
+        sx={{ 
+          height: '100vh',
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          position: 'sticky',
+          top: 0,
+          padding: isScrolled ? { xs: '16px', md: '32px' } : '0px',
+          transition: 'padding 0.5s ease-in-out',
+        }}
+      >
+        <HeroSection />
+      </Box>
+      
+      {/* Container da próxima seção com o ID para o scroll */}
+      <Box id="service-section">
+        {/* <ServicesSection /> */}
+        {/* Placeholder para forçar o scroll */}
+        <Box sx={{ height: '100vh', p: 4 }}>
+            <h1 style={{color: 'white'}}>Próxima Seção (Serviços)</h1>
         </Box>
-    );
+      </Box>
+    </Box>
+  );
 };
 
 export default Home;
