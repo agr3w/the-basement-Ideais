@@ -7,6 +7,7 @@ import ConceptualSVG from './subcomponents/ConceptualSVG';
 import ScrollArrow from './subcomponents/ScrollArrow';
 
 const HeroSection = () => {
+  // A função do botão continua funcionando perfeitamente para rolar a página
   const handleScroll = () => {
     const nextSection = document.getElementById('service-section');
     if (nextSection) {
@@ -15,7 +16,6 @@ const HeroSection = () => {
   };
 
   return (
-    // Simplesmente aplicamos nossa variante customizada!
     <Paper variant="heroContainer"> 
       <Box>
         <Logo />

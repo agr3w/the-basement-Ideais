@@ -2,6 +2,11 @@ import React from 'react';
 import { Box } from '@mui/material';
 // import staircaseImage from '../../../assets/staircase-illustration.svg';
 
+/**
+ * @todo Substituir a URL da imagem por um arquivo SVG local quando disponível.
+ * @returns {JSX.Element}
+ * @description Componente que exibe uma ilustração conceitual de uma escada.
+ */
 const ConceptualSVG = () => {
   return (
     <Box
