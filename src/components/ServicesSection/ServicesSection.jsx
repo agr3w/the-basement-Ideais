@@ -1,45 +1,19 @@
 // Bibliotecas
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Container } from "@mui/material";
 import { motion } from "framer-motion";
-
-// Sub-componentes
-import ServiceCard from "./subcomponents/ServiceCard";
-import ConnectingLine from "./subcomponents/ConnectingLine";
-
-// Ícones
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import WebIcon from "@mui/icons-material/Web";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import GroupIcon from "@mui/icons-material/Group";
 
-// Dados dos cards
-const servicesData = [
-  {
-    icon: <DesignServicesIcon sx={{ fontSize: 50 }} />,
-    title: "Design",
-    top: "50%",
-    left: "7%",
-  },
-  {
-    icon: <WebIcon sx={{ fontSize: 50 }} />,
-    title: "Interface",
-    top: "56%",
-    left: "35%",
-  },
-  {
-    icon: <SettingsSuggestIcon sx={{ fontSize: 50 }} />,
-    title: "Sistemas",
-    top: "73%",
-    left: "50%",
-  },
-  {
-    icon: <GroupIcon sx={{ fontSize: 50 }} />,
-    title: "Gestão",
-    top: "72%",
-    left: "64%",
-  },
-];
+// Sub-componentes
+import ServiceCard from "./subcomponents/ServiceCard";
+import ConnectingLine from "./subcomponents/ConnectingLine";
+import ServiceModal from "./subcomponents/ServiceModal";
+
+// Importa os dados completos dos serviços
+import { servicesData } from "@/data/servicesData";
 
 /**
  * @param {*} x - valor de deslocamento horizontal para animação
@@ -47,6 +21,24 @@ const servicesData = [
  * @description Esta seção apresenta os serviços oferecidos com cards animados e uma linha conectando-os.
  */
 const ServicesSection = ({ x }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+
+  const handleCardClick = (service) => {
+    setSelectedService(service);
+    setModalOpen(true);
+  };
+
+  const handleClose = () => setModalOpen(false);
+
+  const iconSize = 50; // Tamanho padrão dos ícones
+  const iconsMap = {
+    design: <DesignServicesIcon sx={{ fontSize: iconSize }} />,
+    interface: <WebIcon sx={{ fontSize: iconSize }} />,
+    sistemas: <SettingsSuggestIcon sx={{ fontSize: iconSize }} />,
+    gestao: <GroupIcon sx={{ fontSize: iconSize }} />,
+  };
+
   return (
     <Box
       sx={{
@@ -58,7 +50,6 @@ const ServicesSection = ({ x }) => {
       }}
     >
       <Container maxWidth="xl" sx={{ height: "100%", position: "relative" }}>
-        {/* Título da seção */}
         <Typography
           variant="h3"
           sx={{ color: "black", pt: 4, fontWeight: "bold" }}
@@ -85,12 +76,19 @@ const ServicesSection = ({ x }) => {
                 left: service.left,
                 transform: "translateY(-50%)",
                 zIndex: 2,
+                cursor: "pointer",
               }}
+              onClick={() => handleCardClick(service)}
             >
-              <ServiceCard icon={service.icon} title={service.title} />
+              <ServiceCard icon={iconsMap[service.key]} title={service.title} />
             </Box>
           ))}
         </motion.div>
+        <ServiceModal
+          open={modalOpen}
+          onClose={handleClose}
+          service={{ ...selectedService, icon: iconsMap[selectedService?.key] }}
+        />
       </Container>
     </Box>
   );

@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  // 1. PALETA DE CORES
+  // PALETA DE CORES
   palette: {
     mode: "dark", // O tema base é escuro
     background: {
@@ -14,9 +14,9 @@ const theme = createTheme({
     },
   },
 
-  // 2. TIPOGRAFIA
+  // TIPOGRAFIA
   typography: {
-    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif', 
     h3: {
       fontWeight: 400,
       lineHeight: 1.4,
@@ -27,7 +27,7 @@ const theme = createTheme({
     },
   },
 
-  // 3. ESTILOS COMPONENTIZADOS
+  // ESTILOS COMPONENTIZADOS
   components: {
     // Definindo um estilo padrão para todos os componentes Paper
     MuiPaper: {
