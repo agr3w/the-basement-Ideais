@@ -18,7 +18,6 @@ const ContactChatFormActions = ({
     )}
     <Button
       variant="contained"
-      color="primary"
       endIcon={
         loading ? (
           <CircularProgress size={20} color="inherit" />
@@ -32,7 +31,13 @@ const ContactChatFormActions = ({
         py: 1.2,
         fontSize: 18,
         mt: 1,
+        bgcolor: "#fff",
+        color: "#222",
         boxShadow: "0 4px 24px 0 rgba(0,0,0,0.10)",
+        "&:hover": {
+          bgcolor: "#333",
+          color: "#fff",
+        },
       }}
       onClick={onClick}
       disabled={disabled}

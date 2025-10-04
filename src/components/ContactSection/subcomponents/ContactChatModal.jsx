@@ -88,14 +88,22 @@ const ContactChatModal = ({
       open={open}
       onClose={onClose}
       closeAfterTransition
+      disableRestoreFocus={true}
+      disableAutoFocus={false}
+      disableEnforceFocus={false}
       sx={{
         zIndex: 1300,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         p: 2,
-        backdropFilter: "blur(4px)",
-        bgcolor: "rgba(0, 0, 0, 0.3)",
+        // Transição suave do blur e do fundo
+        "& .MuiBackdrop-root": {
+          backdropFilter: open ? "blur(6px)" : "blur(0px)",
+          backgroundColor: "rgba(0,0,0,0.3)",
+          transition:
+            "backdrop-filter 0.5s cubic-bezier(.4,0,.2,1), background-color 0.5s cubic-bezier(.4,0,.2,1)",
+        },
       }}
     >
       <Fade in={open}>
@@ -105,12 +113,13 @@ const ContactChatModal = ({
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
+            bgcolor: "#222",
             borderRadius: 4,
-            boxShadow: 24,
+            boxShadow: "0 8px 32px 0 rgba(0,0,0,0.45)",
             p: { xs: 3, md: 4 },
-            width: { xs: 320, md: 520 },
+            width: { xs: 320, md: 420 },
             outline: "none",
+            color: "#fff",
           }}
         >
           <ContactChatHeader onClose={onClose} sent={sent} step={step} />
@@ -125,25 +134,24 @@ const ContactChatModal = ({
                 error={fieldError}
                 loading={loading}
                 onKeyDown={(e) => {
-                  if (
-                    e.key === "Enter" &&
-                    !currentStep.multiline &&
-                    !loading
-                  )
+                  if (e.key === "Enter" && !currentStep.multiline && !loading)
                     handleNext();
                 }}
+                inputBg="#333"
+                inputColor="#fff"
+                helperColor="#bdbdbd"
               />
               <ContactChatFormActions
                 loading={loading}
                 error={error}
                 step={step}
                 stepsLength={steps.length}
-                disabled={
-                  !form[currentStep.field] ||
-                  !!fieldError ||
-                  loading
-                }
+                disabled={!form[currentStep.field] || !!fieldError || loading}
                 onClick={handleNext}
+                buttonBg="#fff"
+                buttonColor="#222"
+                buttonHoverBg="#bdbdbd"
+                buttonHoverColor="#222"
               />
             </Stack>
           )}

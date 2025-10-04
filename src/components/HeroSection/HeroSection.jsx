@@ -20,7 +20,6 @@ const HeroSection = () => {
       elevation={0}
       sx={{
         height: "100%",
-        p: { xs: 2, md: 4 },
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -33,10 +32,10 @@ const HeroSection = () => {
       </Box>
 
       <Grid container spacing={2} alignItems="center" my={2}>
-        <Grid item xs={12} md={7}>
+        <Grid >
           <Slogan />
         </Grid>
-        <Grid item xs={12} md={5} sx={{ display: "flex" }}>
+        <Grid sx={{ display: "flex" }}>
           <ConceptualSVG />
         </Grid>
       </Grid>

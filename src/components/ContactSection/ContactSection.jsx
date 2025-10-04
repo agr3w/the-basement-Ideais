@@ -32,6 +32,7 @@ const ContactSection = () => {
         overflow: "hidden",
       }}
     >
+      {/* Efeito de luz cinza no fundo */}
       <Box
         sx={{
           position: "absolute",
@@ -39,18 +40,15 @@ const ContactSection = () => {
           left: "50%",
           width: 400,
           height: 400,
-          bgcolor: "primary.main",
-          opacity: 0.08,
+          bgcolor: "#757575",
+          opacity: 0.1,
           borderRadius: "50%",
           filter: "blur(60px)",
           transform: "translate(-50%, -50%)",
           zIndex: 0,
         }}
       />
-      <MeetingRoomIcon
-        sx={{ fontSize: 64, mb: 2, zIndex: 1 }}
-        color="primary"
-      />
+      <MeetingRoomIcon sx={{ fontSize: 64, mb: 2, zIndex: 1, color: "#fff" }} />
       <Typography
         variant="h3"
         fontWeight="bold"
@@ -59,7 +57,7 @@ const ContactSection = () => {
         sx={{
           letterSpacing: 1,
           zIndex: 1,
-          textShadow: "0 2px 16px rgba(0,0,0,0.18)",
+          textShadow: "0 2px 16px rgba(0,0,0,0.22)",
         }}
       >
         Pronto para descer para o porão das ideias?
@@ -75,8 +73,8 @@ const ContactSection = () => {
       >
         Vamos bater um papo rápido para entender sua ideia.
         <br />
-        <span style={{ color: "#90caf9" }}>
-          Clique na porta para começar a conversa!
+        <span style={{ color: "#fff", fontWeight: 600 }}>
+          Abra a porta para entrar em contato!
         </span>
       </Typography>
       <ContactSocials />
@@ -91,10 +89,17 @@ const ContactSection = () => {
           fontSize: 20,
           borderRadius: 8,
           zIndex: 1,
+          bgcolor: "#222",
+          color: "#fff",
           boxShadow: "0 4px 24px 0 rgba(0,0,0,0.18)",
+          "&:hover": {
+            bgcolor: "#fff",
+            color: "#222",
+            boxShadow: "0 6px 32px 0 rgba(0,0,0,0.28)",
+          },
         }}
         onClick={handleOpen}
-        endIcon={<MeetingRoomIcon />}
+        endIcon={<MeetingRoomIcon sx={{ color: "#757575" }} />}
       >
         Abrir a porta
       </Button>
