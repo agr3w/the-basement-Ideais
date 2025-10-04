@@ -37,6 +37,11 @@ const steps = [
 
 const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT; // Certifique-se de definir o caminho correto
 
+if (!FORMSPREE_ENDPOINT) {
+  // log para dev
+  console.error("A variável VITE_FORMSPREE_ENDPOINT não está definida no .env");
+}
+
 const ContactChatModal = ({
   open,
   onClose,
@@ -55,7 +60,12 @@ const ContactChatModal = ({
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      // Envio para o Formspree
+      if (!FORMSPREE_ENDPOINT) {
+        setError(
+          "Erro de configuração: endpoint do formulário não encontrado. Avise o suporte."
+        );
+        return;
+      }
       setLoading(true);
       try {
         const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -69,11 +79,17 @@ const ContactChatModal = ({
         });
         if (response.ok) {
           setSent(true);
+        } else if (response.status === 400) {
+          setError("Preencha todos os campos corretamente.");
+        } else if (response.status === 429) {
+          setError(
+            "Você já enviou uma mensagem recentemente. Aguarde um pouco e tente novamente."
+          );
         } else {
-          setError("Erro ao enviar. Tente novamente.");
+          setError("Erro ao enviar. Tente novamente mais tarde.");
         }
       } catch {
-        setError("Erro ao enviar. Tente novamente.");
+        setError("Erro de conexão. Verifique sua internet e tente novamente.");
       }
       setLoading(false);
     }
