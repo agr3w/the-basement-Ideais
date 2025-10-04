@@ -1,64 +1,38 @@
-import React from "react";
-import { Box, Typography, Grid, Stack, Paper } from "@mui/material"; // Trocamos Container por Paper
-
+import React, { useState } from "react";
+import { Box, Typography, Grid, Stack, Paper } from "@mui/material";
 import Logo from "../HeroSection/subcomponents/Logo";
 import TeamMemberCard from "./subcomponents/TeamMemberCard";
-
-// Dados da equipe (no futuro, isso pode vir de uma API)
-const teamData = [
-  {
-    name: "Pessoa 1",
-    role: "Desenvolvedor Front-end",
-    avatarUrl: "/path/to/avatar1.jpg",
-  },
-  {
-    name: "Pessoa 2",
-    role: "UI/UX Designer",
-    avatarUrl: "/path/to/avatar2.jpg",
-  },
-  {
-    name: "Pessoa 3",
-    role: "Desenvolvedor Back-end",
-    avatarUrl: "/path/to/avatar3.jpg",
-  },
-  {
-    name: "Pessoa 4",
-    role: "Gerente de Projetos",
-    avatarUrl: "/path/to/avatar4.jpg",
-  },
-  {
-    name: "Pessoa 5",
-    role: "Engenheiro de DevOps",
-    avatarUrl: "/path/to/avatar5.jpg",
-  },
-  {
-    name: "Pessoa 6",
-    role: "Analista de QA",
-    avatarUrl: "/path/to/avatar6.jpg",
-  },
-];
+import TeamMemberModal from "./subcomponents/TeamMemberModal";
+import { teamDetails } from "../../data/teamDetails";
 
 const TeamSection = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  const handleCardClick = (member) => {
+    setSelectedMember(member);
+    setModalOpen(true);
+  };
+
+  const handleClose = () => setModalOpen(false);
+
   return (
-    // Trocamos o Box por Paper e aplicamos nossa variante 'sectionContainer'
     <Paper variant="sectionContainer">
       <Stack spacing={10}>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Logo />
         </Box>
-        {/* Este Typography usa o h3 do tema e a cor primária */}
         <Typography
           variant="h3"
           color="text.primary"
           align="center"
           fontWeight={"bold"}
-          //   sx={{ textDecoration: "underline" }}
         >
           Conheça a equipe
         </Typography>
 
         <Grid container spacing={4} justifyContent="center">
-          {teamData.map((member, index) => (
+          {teamDetails.map((member, index) => (
             <Grid
               item
               xs={12}
@@ -76,15 +50,18 @@ const TeamSection = () => {
                 role={member.role}
                 avatarUrl={member.avatarUrl}
                 style={{
-                  height: "140px", // altura fixa
-                  width: "320px", // largura fixa
+                  height: "140px",
+                  width: "320px",
                   minWidth: "220px",
                   maxWidth: "100%",
+                  cursor: "pointer",
                 }}
+                onClick={() => handleCardClick(member)}
               />
             </Grid>
           ))}
         </Grid>
+        <TeamMemberModal open={modalOpen} onClose={handleClose} member={selectedMember} />
       </Stack>
     </Paper>
   );
