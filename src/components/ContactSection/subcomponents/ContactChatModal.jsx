@@ -105,12 +105,13 @@ const ContactChatModal = ({
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
+            bgcolor: "#222", // fundo preto/cinza escuro
             borderRadius: 4,
-            boxShadow: 24,
+            boxShadow: "0 8px 32px 0 rgba(0,0,0,0.45)",
             p: { xs: 3, md: 4 },
-            width: { xs: 320, md: 520 },
+            width: { xs: 320, md: 420 },
             outline: "none",
+            color: "#fff", // texto branco
           }}
         >
           <ContactChatHeader onClose={onClose} sent={sent} step={step} />
@@ -132,6 +133,10 @@ const ContactChatModal = ({
                   )
                     handleNext();
                 }}
+                // Ajuste para campos ficarem escuros
+                inputBg="#333"
+                inputColor="#fff"
+                helperColor="#bdbdbd"
               />
               <ContactChatFormActions
                 loading={loading}
@@ -144,6 +149,10 @@ const ContactChatModal = ({
                   loading
                 }
                 onClick={handleNext}
+                buttonBg="#fff"
+                buttonColor="#222"
+                buttonHoverBg="#bdbdbd"
+                buttonHoverColor="#222"
               />
             </Stack>
           )}

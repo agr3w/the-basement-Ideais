@@ -8,9 +8,12 @@ const ContactFormField = ({
   error,
   loading,
   onKeyDown,
+  inputBg = "#333",
+  inputColor = "#fff",
+  helperColor = "#bdbdbd"
 }) => (
   <>
-    <Typography color="text.primary" fontWeight="bold">
+    <Typography color="#fff" fontWeight="bold">
       {stepConfig.label}
     </Typography>
     <TextField
@@ -25,13 +28,18 @@ const ContactFormField = ({
       rows={stepConfig.rows}
       inputProps={{
         maxLength: stepConfig.maxLength,
+        style: { color: inputColor }
       }}
       helperText={error ? error : stepConfig.helperText}
+      FormHelperTextProps={{
+        sx: { color: helperColor }
+      }}
       error={!!error}
       InputProps={{
         sx: {
-          bgcolor: "background.default",
+          bgcolor: inputBg,
           borderRadius: 2,
+          color: inputColor,
         },
       }}
       onKeyDown={onKeyDown}

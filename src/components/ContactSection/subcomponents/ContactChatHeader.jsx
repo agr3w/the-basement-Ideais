@@ -13,7 +13,7 @@ const ContactChatHeader = ({ onClose, sent, step }) => (
       variant="h5"
       fontWeight="bold"
       mb={2}
-      color="primary"
+      color="#fff"
       sx={{ letterSpacing: 1 }}
     >
       {sent
@@ -22,7 +22,7 @@ const ContactChatHeader = ({ onClose, sent, step }) => (
         ? "Vamos começar 👋"
         : "Continue contando..."}
     </Typography>
-    <Divider sx={{ mb: 2 }} />
+    <Divider sx={{ mb: 2, bgcolor: "#444" }} />
   </>
 );
 
