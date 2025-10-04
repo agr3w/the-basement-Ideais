@@ -1,22 +1,33 @@
-import React from 'react';
-import { Box, Grid, Paper } from '@mui/material';
+import React from "react";
+import { Box, Grid, Paper } from "@mui/material";
 
-import Logo from './subcomponents/Logo';
-import Slogan from './subcomponents/Slogan';
-import ConceptualSVG from './subcomponents/ConceptualSVG';
-import ScrollArrow from './subcomponents/ScrollArrow';
+import Logo from "./subcomponents/Logo";
+import Slogan from "./subcomponents/Slogan";
+import ConceptualSVG from "./subcomponents/ConceptualSVG";
+import ScrollArrow from "./subcomponents/ScrollArrow";
 
 const HeroSection = () => {
-  // A função do botão continua funcionando perfeitamente para rolar a página
   const handleScroll = () => {
-    const nextSection = document.getElementById('service-section');
+    const nextSection = document.getElementById("service-section");
     if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
+      nextSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <Paper variant="heroContainer"> 
+    <Paper
+      variant="heroContainer"
+      elevation={0}
+      sx={{
+        height: "100%",
+        p: { xs: 2, md: 4 },
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+        textAlign: "start",
+      }}
+    >
       <Box>
         <Logo />
       </Box>
@@ -25,7 +36,7 @@ const HeroSection = () => {
         <Grid item xs={12} md={7}>
           <Slogan />
         </Grid>
-        <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid item xs={12} md={5} sx={{ display: "flex" }}>
           <ConceptualSVG />
         </Grid>
       </Grid>
