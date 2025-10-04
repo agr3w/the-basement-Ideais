@@ -17,8 +17,8 @@ const TeamMemberModal = ({ open, onClose, member }) => {
   if (!member) return null;
 
   return (
-    <Modal 
-      open={open} 
+    <Modal
+      open={open}
       onClose={onClose}
       closeAfterTransition
       disableAutoFocus={false}
@@ -29,6 +29,10 @@ const TeamMemberModal = ({ open, onClose, member }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        "& .MuiBackdrop-root": {
+          backdropFilter: open ? "blur(6px)" : "blur(0px)",
+          backgroundColor: "rgba(0,0,0,0.3)",
+        },
       }}
     >
       <Fade in={open}>
@@ -47,25 +51,25 @@ const TeamMemberModal = ({ open, onClose, member }) => {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
-            <IconButton 
+            <IconButton
               onClick={onClose}
-              sx={{ 
+              sx={{
                 color: "#fff",
-                "&:hover": { bgcolor: "rgba(255,255,255,0.1)" }
+                "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
               }}
             >
               <CloseIcon />
             </IconButton>
           </Box>
-          
+
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
             <Avatar
               src={member.avatarUrl}
               alt={member.name}
-              sx={{ 
-                width: 72, 
+              sx={{
+                width: 72,
                 height: 72,
-                border: "2px solid #666"
+                border: "2px solid #666",
               }}
             />
             <Box>
@@ -77,32 +81,44 @@ const TeamMemberModal = ({ open, onClose, member }) => {
               </Typography>
             </Box>
           </Box>
-          
-          <Typography sx={{ mb: 3, color: "#e0e0e0" }}>
-            {member.bio}
-          </Typography>
-          
+
+          <Typography sx={{ mb: 3, color: "#e0e0e0" }}>{member.bio}</Typography>
+
           <Divider sx={{ my: 2, bgcolor: "#444" }} />
-          
-          <Typography variant="subtitle2" fontWeight="bold" color="#fff" sx={{ mb: 1 }}>
+
+          <Typography
+            variant="subtitle2"
+            fontWeight="bold"
+            color="#fff"
+            sx={{ mb: 1 }}
+          >
             Competências
           </Typography>
-          <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: 1, mb: 3 }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ flexWrap: "wrap", gap: 1, mb: 3 }}
+          >
             {member.skills?.map((skill, idx) => (
-              <Chip 
-                key={idx} 
-                label={skill} 
+              <Chip
+                key={idx}
+                label={skill}
                 sx={{
                   bgcolor: "#333",
                   color: "#90caf9",
                   border: "1px solid #666",
-                  "&:hover": { bgcolor: "#444" }
+                  "&:hover": { bgcolor: "#444" },
                 }}
               />
             ))}
           </Stack>
-          
-          <Typography variant="subtitle2" fontWeight="bold" color="#fff" sx={{ mb: 1 }}>
+
+          <Typography
+            variant="subtitle2"
+            fontWeight="bold"
+            color="#fff"
+            sx={{ mb: 1 }}
+          >
             Formação
           </Typography>
           <Stack spacing={1} sx={{ mb: 3 }}>
@@ -112,10 +128,15 @@ const TeamMemberModal = ({ open, onClose, member }) => {
               </Typography>
             ))}
           </Stack>
-          
+
           {member.hobbies && (
             <>
-              <Typography variant="subtitle2" fontWeight="bold" color="#fff" sx={{ mb: 1 }}>
+              <Typography
+                variant="subtitle2"
+                fontWeight="bold"
+                color="#fff"
+                sx={{ mb: 1 }}
+              >
                 Hobbies
               </Typography>
               <Typography variant="body2" sx={{ mb: 3, color: "#e0e0e0" }}>
@@ -123,7 +144,7 @@ const TeamMemberModal = ({ open, onClose, member }) => {
               </Typography>
             </>
           )}
-          
+
           {member.social && (
             <Stack direction="row" spacing={2}>
               {member.social.linkedin && (
@@ -134,7 +155,7 @@ const TeamMemberModal = ({ open, onClose, member }) => {
                   sx={{
                     color: "#90caf9",
                     textDecoration: "none",
-                    "&:hover": { textDecoration: "underline" }
+                    "&:hover": { textDecoration: "underline" },
                   }}
                 >
                   LinkedIn
@@ -148,7 +169,7 @@ const TeamMemberModal = ({ open, onClose, member }) => {
                   sx={{
                     color: "#90caf9",
                     textDecoration: "none",
-                    "&:hover": { textDecoration: "underline" }
+                    "&:hover": { textDecoration: "underline" },
                   }}
                 >
                   GitHub
