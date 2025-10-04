@@ -34,10 +34,6 @@ const TeamSection = () => {
         <Grid container spacing={4} justifyContent="center">
           {teamDetails.map((member, index) => (
             <Grid
-              item
-              xs={12}
-              md={6}
-              lg={4}
               key={index}
               sx={{
                 display: "flex",
@@ -61,7 +57,11 @@ const TeamSection = () => {
             </Grid>
           ))}
         </Grid>
-        <TeamMemberModal open={modalOpen} onClose={handleClose} member={selectedMember} />
+        <TeamMemberModal
+          open={modalOpen}
+          onClose={handleClose}
+          member={selectedMember}
+        />
       </Stack>
     </Paper>
   );

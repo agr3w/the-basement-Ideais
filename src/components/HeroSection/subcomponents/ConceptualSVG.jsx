@@ -45,6 +45,10 @@ const ConceptualSVG = ({ width = { xs: 180, md: 250 }, color = "#fff" }) => {
               rx={5}
               fill={color}
               opacity={line.opacity}
+              initial={{
+                height: baseHeight,
+                y: line.baseY,
+              }}
               animate={{
                 height: [
                   baseHeight,
