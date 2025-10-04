@@ -1,46 +1,12 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  IconButton,
-  Stack,
-  TextField,
-  Button,
-  Divider,
-  Fade,
-  Modal,
-  CircularProgress,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Stack, Fade, Modal } from "@mui/material";
+import steps from "./ContactFormSteps";
+import ContactFormField from "./ContactFormField";
+import ContactChatHeader from "./ContactChatHeader";
+import ContactChatSuccess from "./ContactChatSuccess";
+import ContactChatFormActions from "./ContactChatFormActions";
 
-const steps = [
-  {
-    label: "Qual seu nome?",
-    field: "name",
-    placeholder: "Digite seu nome",
-  },
-  {
-    label: "Qual seu e-mail?",
-    field: "email",
-    placeholder: "Digite seu e-mail",
-    type: "email",
-  },
-  {
-    label: "Conte pra gente sua ideia ou desafio!",
-    field: "message",
-    placeholder: "Descreva sua ideia, projeto ou desafio...",
-    multiline: true,
-    rows: 4,
-  },
-];
-
-const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT; // Certifique-se de definir o caminho correto
-
-if (!FORMSPREE_ENDPOINT) {
-  // log para dev
-  console.error("A variável VITE_FORMSPREE_ENDPOINT não está definida no .env");
-}
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
 const ContactChatModal = ({
   open,
@@ -54,11 +20,26 @@ const ContactChatModal = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [fieldError, setFieldError] = useState("");
+
+  const currentStep = steps[step];
+
+  const validateField = (value) => {
+    if (currentStep.validate) {
+      return currentStep.validate(value);
+    }
+    return "";
+  };
 
   const handleNext = async () => {
     setError("");
+    const validationMsg = validateField(form[currentStep.field]);
+    setFieldError(validationMsg);
+    if (validationMsg) return;
+
     if (step < steps.length - 1) {
       setStep(step + 1);
+      setFieldError("");
     } else {
       if (!FORMSPREE_ENDPOINT) {
         setError(
@@ -96,7 +77,10 @@ const ContactChatModal = ({
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [steps[step].field]: e.target.value });
+    const value = e.target.value;
+    if (currentStep.maxLength && value.length > currentStep.maxLength) return;
+    setForm({ ...form, [currentStep.field]: value });
+    setFieldError(validateField(value));
   };
 
   return (
@@ -129,85 +113,38 @@ const ContactChatModal = ({
             outline: "none",
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton onClick={onClose}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            mb={2}
-            color="primary"
-            sx={{ letterSpacing: 1 }}
-          >
-            {sent
-              ? "Mensagem enviada!"
-              : step === 0
-              ? "Vamos começar 👋"
-              : "Continue contando..."}
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
+          <ContactChatHeader onClose={onClose} sent={sent} step={step} />
           {sent ? (
-            <Typography color="text.secondary" align="center">
-              Obrigado por compartilhar sua ideia! Em breve entraremos em
-              contato para descer juntos ao porão das ideias. 🚀
-            </Typography>
+            <ContactChatSuccess />
           ) : (
             <Stack spacing={2}>
-              <Typography color="text.primary" fontWeight="bold">
-                {steps[step].label}
-              </Typography>
-              <TextField
-                autoFocus
-                fullWidth
-                variant="filled"
-                type={steps[step].type || "text"}
-                placeholder={steps[step].placeholder}
-                value={form[steps[step].field]}
+              <ContactFormField
+                stepConfig={currentStep}
+                value={form[currentStep.field]}
                 onChange={handleChange}
-                multiline={steps[step].multiline}
-                rows={steps[step].rows}
-                InputProps={{
-                  sx: {
-                    bgcolor: "background.default",
-                    borderRadius: 2,
-                  },
-                }}
+                error={fieldError}
+                loading={loading}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && !steps[step].multiline && !loading)
+                  if (
+                    e.key === "Enter" &&
+                    !currentStep.multiline &&
+                    !loading
+                  )
                     handleNext();
                 }}
-                disabled={loading}
               />
-              {error && (
-                <Typography color="error" fontSize={14}>
-                  {error}
-                </Typography>
-              )}
-              <Button
-                variant="contained"
-                color="primary"
-                endIcon={
-                  loading ? (
-                    <CircularProgress size={20} color="inherit" />
-                  ) : step === steps.length - 1 ? (
-                    <SendIcon />
-                  ) : null
+              <ContactChatFormActions
+                loading={loading}
+                error={error}
+                step={step}
+                stepsLength={steps.length}
+                disabled={
+                  !form[currentStep.field] ||
+                  !!fieldError ||
+                  loading
                 }
-                sx={{
-                  fontWeight: "bold",
-                  borderRadius: 2,
-                  py: 1.2,
-                  fontSize: 18,
-                  mt: 1,
-                  boxShadow: "0 4px 24px 0 rgba(0,0,0,0.10)",
-                }}
                 onClick={handleNext}
-                disabled={!form[steps[step].field] || loading}
-              >
-                {step === steps.length - 1 ? "Enviar" : "Próximo"}
-              </Button>
+              />
             </Stack>
           )}
         </Box>
