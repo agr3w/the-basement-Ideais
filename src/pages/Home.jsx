@@ -8,6 +8,7 @@ import HeroSection from "@/components/HeroSection/HeroSection";
 import ServicesSection from "@/components/ServicesSection/ServicesSection";
 import TeamSection from "../components/TeamSection/TeamSection";
 import ContactSection from "../components/ContactSection/ContactSection";
+import Footer from "../components/layout/Footer";
 
 /**
  * @todo: Adicionar mais seções conforme necessário
@@ -16,27 +17,35 @@ import ContactSection from "../components/ContactSection/ContactSection";
  */
 const Home = () => {
   return (
-    <FullPageScroll>
-      {/* Cada Box aqui é um "slide" de tela cheia */}
-      <Box
-        sx={{ height: "100vh", width: "100vw", p: { xs: "16px", md: "32px" } }}
-      >
-        <HeroSection />
-      </Box>
+    <>
+      <FullPageScroll>
+        {/* Cada Box aqui é um "slide" de tela cheia */}
+        <Box
+          sx={{
+            height: "100vh",
+            width: "100vw",
+            p: { xs: "16px", md: "32px" },
+          }}
+        >
+          <HeroSection />
+        </Box>
 
-      <ServicesSection
-        type="horizontal-scroll"
-        trackWidth={400}
-        id="service-section"
-      />
+        <ServicesSection
+          type="horizontal-scroll"
+          trackWidth={400}
+          id="service-section"
+        />
 
-      <Box sx={{ p: { xs: "16px", md: "32px" } }}>
-        <TeamSection />
-      </Box>
-      <Box sx={{ p: { xs: "16px", md: "32px" } }}>
-        <ContactSection />
-      </Box>
-    </FullPageScroll>
+        <Box sx={{ p: { xs: "16px", md: "32px" } }}>
+          <TeamSection />
+        </Box>
+        
+        <Box sx={{ p: { xs: "16px", md: "32px" } }}>
+          <ContactSection />
+          <Footer />
+        </Box>
+      </FullPageScroll>
+    </>
   );
 };
 

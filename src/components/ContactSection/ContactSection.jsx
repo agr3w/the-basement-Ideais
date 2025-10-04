@@ -21,7 +21,7 @@ const ContactSection = () => {
     <Paper
       variant="sectionContainer"
       sx={{
-        minHeight: "70vh",
+        minHeight: "80vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

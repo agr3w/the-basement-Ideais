@@ -109,7 +109,7 @@ const ContactChatModal = ({
             borderRadius: 4,
             boxShadow: 24,
             p: { xs: 3, md: 4 },
-            width: { xs: 320, md: 420 },
+            width: { xs: 320, md: 520 },
             outline: "none",
           }}
         >
