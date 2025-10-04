@@ -7,6 +7,7 @@ import FullPageScroll from "@/components/layout/FullPageScroll";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import ServicesSection from "@/components/ServicesSection/ServicesSection";
 import TeamSection from "../components/TeamSection/TeamSection";
+import ContactSection from "../components/ContactSection/ContactSection";
 
 /**
  * @todo: Adicionar mais seções conforme necessário
@@ -31,6 +32,9 @@ const Home = () => {
 
       <Box sx={{ p: { xs: "16px", md: "32px" } }}>
         <TeamSection />
+      </Box>
+      <Box sx={{ p: { xs: "16px", md: "32px" } }}>
+        <ContactSection />
       </Box>
     </FullPageScroll>
   );
