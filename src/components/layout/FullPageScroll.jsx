@@ -29,7 +29,7 @@ const NavigationDots = ({ total, activeIndex, onDotClick }) => (
 );
 
 // Configurações de animação
-const animationDuration = 1.0;
+const animationDuration = 0.7;
 const animationEase = [0.4, 0, 0.2, 1];
 
 /**
@@ -47,7 +47,7 @@ const FullPageScroll = ({ children }) => {
   // NOVO: Controle para a animação horizontal
   const x = useMotionValue(0);
 
-  const goToSection = (index) => {
+  const goToSection = React.useCallback((index) => {
     if (isAnimating || index < 0 || index >= totalSections) return;
     setIsAnimating(true);
     x.set(0); // Reseta a posição horizontal ao trocar de slide
@@ -58,7 +58,7 @@ const FullPageScroll = ({ children }) => {
       setCurrentSection(index);
       setIsAnimating(false);
     });
-  };
+  }, [isAnimating, totalSections, mainControls, x]);
 
   useEffect(() => {
     const handleWheel = (event) => {
@@ -76,7 +76,7 @@ const FullPageScroll = ({ children }) => {
       if (isHorizontalSection) {
         event.preventDefault();
         const currentX = x.get();
-        const newX = currentX - event.deltaY * 2; // Multiplicador para sensibilidade
+        const newX = currentX - event.deltaY * 6; // Multiplicador para sensibilidade
 
         // Limites da rolagem horizontal
         const trackWidth = (activeChild.props.trackWidth || 400) - 100; // Largura do trilho em % (ex: 400%)
@@ -104,7 +104,7 @@ const FullPageScroll = ({ children }) => {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [isAnimating, currentSection, totalSections, childrenArray, x]);
+  }, [isAnimating, currentSection, totalSections, childrenArray, x, goToSection]);
 
   return (
     <>

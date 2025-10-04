@@ -1,12 +1,12 @@
 // Bibliotecas
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React from "react";
+import { Box, Typography } from "@mui/material";
 
 // Componentes
-import FullPageScroll from '@/components/layout/FullPageScroll';
-import HeroSection from '@/components/HeroSection/HeroSection';
-import ServicesSection from '@/components/ServicesSection/ServicesSection';
-
+import FullPageScroll from "@/components/layout/FullPageScroll";
+import HeroSection from "@/components/HeroSection/HeroSection";
+import ServicesSection from "@/components/ServicesSection/ServicesSection";
+import TeamSection from "../components/TeamSection/TeamSection";
 
 /**
  * @todo: Adicionar mais seções conforme necessário
@@ -17,12 +17,21 @@ const Home = () => {
   return (
     <FullPageScroll>
       {/* Cada Box aqui é um "slide" de tela cheia */}
-      <Box sx={{ height: '100vh', width: '100vw', p: { xs: '16px', md: '32px' } }}>
+      <Box
+        sx={{ height: "100vh", width: "100vw", p: { xs: "16px", md: "32px" } }}
+      >
         <HeroSection />
       </Box>
 
-      <ServicesSection type="horizontal-scroll" trackWidth={400} id="service-section" />
+      <ServicesSection
+        type="horizontal-scroll"
+        trackWidth={400}
+        id="service-section"
+      />
 
+      <Box sx={{ p: { xs: "16px", md: "32px" } }}>
+        <TeamSection />
+      </Box>
     </FullPageScroll>
   );
 };
