@@ -36,7 +36,7 @@ const HeroSection = () => {
           <Slogan />
         </Grid>
         <Grid sx={{ display: "flex" }}>
-          <ConceptualSVG />
+          <ConceptualSVG color="#fff" />
         </Grid>
       </Grid>
 
