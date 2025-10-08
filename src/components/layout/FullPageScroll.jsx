@@ -40,7 +40,7 @@ const FullPageScroll = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // NOVO: Controle para a animação horizontal
+  // Controle para a animação horizontal
   const x = useMotionValue(0);
 
   const goToSection = React.useCallback(

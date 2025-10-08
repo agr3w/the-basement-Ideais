@@ -22,63 +22,70 @@ const TeamSection = () => {
   const handleClose = () => setModalOpen(false);
 
   return (
-    <Paper variant="sectionContainer" sx={{ mt: { xs: 32, md: 12 }, py: { xs: 4, md: 8 } }}>
-      <Stack spacing={10}>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Logo />
-        </Box>
-        <Typography
-          variant="h3"
-          color="text.primary"
-          align="center"
-          fontWeight={"bold"}
-        >
-          Conheça a equipe
-        </Typography>
+    <Box
+      sx={{
+        mt: { xs: 31, md: 0 },
+        width: "100%",
+      }}
+    >
+      <Paper variant="sectionContainer" sx={{ py: { xs: 4, md: 6 }, mt: 0 }}>
+        <Stack spacing={1}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Logo />
+          </Box>
+          <Typography
+            variant="h3"
+            color="text.primary"
+            align="center"
+            fontWeight={"bold"}
+          >
+            Conheça a equipe
+          </Typography>
 
-        {/* Desktop: Grid normal */}
-        {!isMobile ? (
-          <Grid container spacing={4} justifyContent="center">
-            {teamDetails.map((member, index) => (
-              <Grid
-                key={index}
-                sx={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  justifyContent: "center",
-                }}
-              >
-                <TeamMemberCard
-                  name={member.name}
-                  role={member.role}
-                  avatarUrl={member.avatarUrl}
-                  style={{
-                    height: "140px",
-                    width: "320px",
-                    minWidth: "220px",
-                    maxWidth: "100%",
-                    cursor: "pointer",
+          {/* Desktop: Grid normal */}
+          {!isMobile ? (
+            <Grid container spacing={4} justifyContent="center" >
+              {teamDetails.map((member, index) => (
+                <Grid
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    justifyContent: "center",
                   }}
-                  onClick={() => handleCardClick(member)}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        ) : (
-          /* Mobile: Carrossel horizontal */
-          <TeamMemberCarousel
-            members={teamDetails}
-            onCardClick={handleCardClick}
-          />
-        )}
+                >
+                  <TeamMemberCard
+                    name={member.name}
+                    role={member.role}
+                    avatarUrl={member.avatarUrl}
+                    style={{
+                      height: "140px",
+                      width: "320px",
+                      minWidth: "220px",
+                      maxWidth: "100%",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleCardClick(member)}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            /* Mobile: Carrossel horizontal */
+            <TeamMemberCarousel
+              members={teamDetails}
+              onCardClick={handleCardClick}
+            />
+          )}
 
-        <TeamMemberModal
-          open={modalOpen}
-          onClose={handleClose}
-          member={selectedMember}
-        />
-      </Stack>
-    </Paper>
+          <TeamMemberModal
+            open={modalOpen}
+            onClose={handleClose}
+            member={selectedMember}
+          />
+        </Stack>
+      </Paper>
+    </Box>
   );
 };
 

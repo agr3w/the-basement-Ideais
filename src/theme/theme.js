@@ -16,7 +16,7 @@ const theme = createTheme({
 
   // TIPOGRAFIA
   typography: {
-    fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif', 
+    fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
     h3: {
       fontWeight: 400,
       lineHeight: 1.4,
