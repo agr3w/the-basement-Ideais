@@ -14,7 +14,7 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      px: 2,
+      px: { xs: 0, sm: 2 },
     }}
   >
     <Typography
@@ -31,25 +31,33 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
       👈 Deslize para conhecer toda a equipe 👉
     </Typography>
 
-    <Box sx={{ width: "100%", maxWidth: "600px" }}>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: { xs: 340, sm: 600 },
+        mx: "auto",
+        overflow: "visible",
+      }}
+    >
       <Swiper
         modules={[Pagination, EffectCoverflow, Autoplay]}
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView="auto"
+        slidesPerView={1}
         loop={true}
+        spaceBetween={25}
         autoplay={{
           delay: 3500,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
         coverflowEffect={{
-          rotate: 15, // Reduzido para menos inclinação
+          rotate: 0,
           stretch: 0,
-          depth: 120,
+          depth: 80,
           modifier: 1,
-          slideShadows: false, // Remove as sombras automáticas
+          slideShadows: false,
         }}
         pagination={{
           clickable: true,
@@ -57,8 +65,8 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
           dynamicMainBullets: 3,
         }}
         style={{
-          paddingBottom: "50px",
-          paddingTop: "20px",
+          paddingBottom: "40px",
+          paddingTop: "16px",
           "--swiper-pagination-color": "#90caf9",
           "--swiper-pagination-bullet-inactive-color": "#444",
           "--swiper-pagination-bullet-size": "8px",
@@ -66,28 +74,13 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
         }}
         breakpoints={{
           0: {
-            slidesPerView: 1.2,
-            coverflowEffect: {
-              rotate: 20,
-              depth: 100,
-              slideShadows: false,
-            },
-          },
-          480: {
-            slidesPerView: 1.4,
-            coverflowEffect: {
-              rotate: 18,
-              depth: 110,
-              slideShadows: false,
-            },
+            slidesPerView: 1,
           },
           600: {
-            slidesPerView: 1.6,
-            coverflowEffect: {
-              rotate: 15,
-              depth: 120,
-              slideShadows: false,
-            },
+            slidesPerView: 1,
+          },
+          900: {
+            slidesPerView: 1,
           },
         }}
       >
@@ -95,22 +88,25 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
           <SwiperSlide
             key={`${member.name}-${index}`}
             style={{
-              width: "280px",
+              width: "100%",
               height: "auto",
-              background: "transparent", // Garante fundo transparente
+              background: "transparent",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 0,
             }}
           >
             <Box
               sx={{
+                width: "100%",
+                height: { xs: 160, sm: 180 },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                p: 1,
-                transform: "translateZ(0)",
-                transition: "all 0.3s ease",
                 background: "transparent",
                 "&:hover": {
-                  transform: "translateZ(0) scale(1.02)",
+                  transform: "scale(1.02)",
                 },
               }}
             >
@@ -119,14 +115,15 @@ const TeamMemberCarousel = ({ members, onCardClick }) => (
                 role={member.role}
                 avatarUrl={member.avatarUrl}
                 style={{
-                  height: "140px",
                   width: "100%",
-                  maxWidth: "260px",
+                  height: "100%",
+                  maxWidth: "100%",
+                  minWidth: 0,
                   cursor: "pointer",
                   borderRadius: "16px",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
                   transition: "all 0.3s ease",
-                  opacity: 1, // Garante opacidade total
+                  opacity: 1,
                 }}
                 onClick={() => onCardClick(member)}
               />

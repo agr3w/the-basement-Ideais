@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Box, Typography, Button, Paper } from "@mui/material";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import ContactSocials from "./subcomponents/ContactSocials";
 import ContactChatModal from "./subcomponents/ContactChatModal";
+
+import WavesIcon from '@mui/icons-material/Waves';
 
 const ContactSection = () => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ const ContactSection = () => {
     <Paper
       variant="sectionContainer"
       sx={{
+        mt: { xs: 32, md: 12 }, 
         minHeight: "80vh",
         display: "flex",
         flexDirection: "column",
@@ -48,7 +50,7 @@ const ContactSection = () => {
           zIndex: 0,
         }}
       />
-      <MeetingRoomIcon sx={{ fontSize: 64, mb: 2, zIndex: 1, color: "#fff" }} />
+      <WavesIcon sx={{ fontSize: 64, mb: 2, zIndex: 1, color: "#fff" }} />
       <Typography
         variant="h3"
         fontWeight="bold"
@@ -60,7 +62,7 @@ const ContactSection = () => {
           textShadow: "0 2px 16px rgba(0,0,0,0.22)",
         }}
       >
-        Pronto para descer para o porão das ideias?
+        Entre em Contato Conosco
       </Typography>
       <Typography
         color="text.secondary"
@@ -74,7 +76,7 @@ const ContactSection = () => {
         Vamos bater um papo rápido para entender sua ideia.
         <br />
         <span style={{ color: "#fff", fontWeight: 600 }}>
-          Abra a porta para entrar em contato!
+          Nossas Mídias para Contato!:
         </span>
       </Typography>
       <ContactSocials />
@@ -99,9 +101,9 @@ const ContactSection = () => {
           },
         }}
         onClick={handleOpen}
-        endIcon={<MeetingRoomIcon sx={{ color: "#757575" }} />}
+        endIcon={<WavesIcon sx={{ color: "#757575" }} />}
       >
-        Abrir a porta
+        Mande sua Mensagem
       </Button>
       <ContactChatModal
         open={open}

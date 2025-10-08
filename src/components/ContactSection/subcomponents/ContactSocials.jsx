@@ -8,7 +8,7 @@ const ContactSocials = () => (
   <Stack direction="row" spacing={2} sx={{ zIndex: 1 }}>
     <Tooltip title="E-mail">
       <IconButton
-        href="mailto:contato@thebasement.com"
+        href="mailto:contato.thewavem@gmail.com"
         target="_blank"
         size="large"
         sx={{
@@ -25,7 +25,7 @@ const ContactSocials = () => (
         <AlternateEmailIcon />
       </IconButton>
     </Tooltip>
-    <Tooltip title="WhatsApp">
+    {/* <Tooltip title="WhatsApp">
       <IconButton
         href="https://wa.me/5599999999999"
         target="_blank"
@@ -43,7 +43,7 @@ const ContactSocials = () => (
       >
         <WhatsAppIcon />
       </IconButton>
-    </Tooltip>
+    </Tooltip> */}
     <Tooltip title="Instagram">
       <IconButton
         href="https://instagram.com/thebasement"

@@ -19,7 +19,7 @@ const wavePaths = [
 const ConceptualSVG = ({
   width = { xs: 200, md: 300 },
   color = "#000",
-  strokeWidth = 1.5,
+  strokeWidth = 2.5,
 }) => {
   return (
     <Box

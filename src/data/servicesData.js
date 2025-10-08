@@ -6,7 +6,7 @@ export const servicesData = [
     left: "7%",
     description: "Criamos soluções visuais modernas e funcionais, alinhadas à identidade da sua marca e focadas na experiência do usuário.",
     modalText: "Nosso time de design trabalha lado a lado com o cliente para garantir que cada projeto tenha uma identidade única, funcionalidade e apelo visual.",
-    modalImg: "/img/services/design-context.png",
+    // modalImg: "/img/services/design-context.png",
   },
   {
     key: "interface",
@@ -15,7 +15,7 @@ export const servicesData = [
     left: "35%",
     description: "Desenvolvemos interfaces intuitivas e responsivas, proporcionando navegação fluida em qualquer dispositivo.",
     modalText: "Acreditamos que uma boa interface é essencial para o sucesso digital. Por isso, priorizamos usabilidade e acessibilidade em todos os projetos.",
-    modalImg: "/img/services/interface-context.png",
+    // modalImg: "/img/services/interface-context.png",
   },
   {
     key: "sistemas",
@@ -24,7 +24,7 @@ export const servicesData = [
     left: "50%",
     description: "Construímos sistemas robustos, escaláveis e seguros, adaptados às necessidades do seu negócio.",
     modalText: "Utilizamos as melhores práticas de engenharia de software para entregar sistemas eficientes, seguros e de fácil manutenção.",
-    modalImg: "/img/services/sistemas-context.png",
+    // modalImg: "/img/services/sistemas-context.png",
   },
   {
     key: "gestao",
@@ -33,6 +33,6 @@ export const servicesData = [
     left: "64%",
     description: "Oferecemos soluções de gestão para otimizar processos e potencializar resultados da sua equipe.",
     modalText: "Nossas ferramentas de gestão ajudam empresas a organizar fluxos de trabalho, acompanhar métricas e tomar decisões estratégicas.",
-    modalImg: "/img/services/gestao-context.png",
+    // modalImg: "/img/services/gestao-context.png",
   },
 ];

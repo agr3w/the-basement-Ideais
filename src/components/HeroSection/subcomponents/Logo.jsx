@@ -9,19 +9,14 @@ import logoImage from '../../../assets/logo-the-basement.png';
 const Logo = () => {
   return (
     <Box
-      component="span"
+      component="img"
+      src={logoImage}
+      alt="The Basement Logo"
       sx={{
-        fontWeight: 'bold',
-        fontSize: { xs: '2rem', md: '2.5rem' },
-        letterSpacing: '0.05em',
-        color: 'theme.palette.primary.main',
-        fontFamily: 'Montserrat, Arial, sans-serif',
-        textTransform: 'uppercase',
-        display: 'inline-block',
+        height: "120px", // Altura responsiva
+        width: 'auto',
       }}
-    >
-      The Wavem
-    </Box>
+    />
   );
 };
 

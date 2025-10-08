@@ -29,7 +29,7 @@ const Home = () => {
         >
           <HeroSection />
         </Box>
-
+          
         <ServicesSection
           type="horizontal-scroll"
           trackWidth={400}

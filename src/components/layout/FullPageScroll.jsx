@@ -12,6 +12,9 @@ import { Box } from "@mui/material";
 const animationDuration = 0.7;
 const animationEase = [0.4, 0, 0.2, 1];
 
+// Breakpoint para mobile
+const MOBILE_BREAKPOINT = 768;
+
 /**
  * @param {*} param0
  * @returns {JSX.Element}
@@ -23,6 +26,19 @@ const FullPageScroll = ({ children }) => {
   const [currentSection, setCurrentSection] = useState(0);
   const totalSections = Children.count(children);
   const childrenArray = Children.toArray(children);
+
+  // Detecta se está em tela pequena (mobile/tablet)
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= MOBILE_BREAKPOINT : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // NOVO: Controle para a animação horizontal
   const x = useMotionValue(0);
@@ -46,6 +62,8 @@ const FullPageScroll = ({ children }) => {
   );
 
   useEffect(() => {
+    if (isMobile) return; // Em mobile, usar scroll nativo: não anexa o handler customizado
+
     const handleWheel = (event) => {
       if (isAnimating) {
         event.preventDefault();
@@ -100,7 +118,23 @@ const FullPageScroll = ({ children }) => {
     childrenArray,
     x,
     goToSection,
+    isMobile,
   ]);
+
+  // Em mobile, renderiza scroll nativo (página normal)
+  if (isMobile) {
+    return (
+      <>
+        <Box sx={{ height: "100vh", overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
+          {Children.map(children, (child, index) => (
+            <Box key={index} sx={{ height: "100vh", width: "100vw" }}>
+              {child}
+            </Box>
+          ))}
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>

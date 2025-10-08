@@ -10,9 +10,9 @@ import { teamDetails } from "@/data/teamDetails";
 const TeamSection = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
-  
+
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleCardClick = (member) => {
     setSelectedMember(member);
@@ -22,7 +22,7 @@ const TeamSection = () => {
   const handleClose = () => setModalOpen(false);
 
   return (
-    <Paper variant="sectionContainer">
+    <Paper variant="sectionContainer" sx={{ mt: { xs: 32, md: 12 }, py: { xs: 4, md: 8 } }}>
       <Stack spacing={10}>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Logo />
@@ -71,7 +71,7 @@ const TeamSection = () => {
             onCardClick={handleCardClick}
           />
         )}
-        
+
         <TeamMemberModal
           open={modalOpen}
           onClose={handleClose}
