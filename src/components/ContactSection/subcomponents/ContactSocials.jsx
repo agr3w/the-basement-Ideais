@@ -44,7 +44,7 @@ const ContactSocials = () => (
         <WhatsAppIcon />
       </IconButton>
     </Tooltip> */}
-    <Tooltip title="Instagram">
+    {/* <Tooltip title="Instagram">
       <IconButton
         href="https://instagram.com/thebasement"
         target="_blank"
@@ -62,7 +62,7 @@ const ContactSocials = () => (
       >
         <InstagramIcon />
       </IconButton>
-    </Tooltip>
+    </Tooltip> */}
   </Stack>
 );
 
