@@ -1,0 +1,13 @@
+# Configurações de Build
+[build]
+  # Comando para buildar o projeto. Verifique se é o mesmo do seu package.json
+  command = "npm run build"
+  
+  # Pasta que o comando de build gera. Geralmente "dist" para Vite/Vue ou "build" para Create React App.
+  publish = "dist" 
+
+# Regra de redirecionamento para SPAs
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
